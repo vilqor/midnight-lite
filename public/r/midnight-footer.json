@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "midnight-footer",
+  "title": "Midnight footer",
+  "author": "Vilqor <https://vilqor.com>",
+  "description": "A footer with a short description, link columns that fold on phones, and the product name set large and fading out.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils",
+    "https://midnight-lite.vilqor.com/r/midnight-theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/site/footer.tsx",
+      "content": "import { Plus } from \"lucide-react\"\n\nimport { Logo } from \"./logo\"\n\nexport type FooterContent = {\n  name: string\n  legalName: string\n  /** the year in the © line; pass new Date().getFullYear() in a static build, or a number */\n  year: number\n  description: string\n  email: string\n  /** the line next to the green dot */\n  status: string\n  /** the footer navigation's name for screen readers */\n  nav: string\n  columns: { title: string; links: { label: string; href: string }[] }[]\n  /** a small link at the end of the bottom line */\n  credit?: { label: string; href: string } | null\n}\n\n/** The footer: a short description, link columns that fold on phones, and the name set large, fading into the night. */\nexport function Footer({ name, legalName, year, description, email, status, nav, columns, credit }: FooterContent) {\n  return (\n    <footer className=\"relative overflow-hidden\">\n      <div className=\"container-x grid gap-12 pt-16 pb-10 max-md:gap-6 max-md:pt-12 max-md:pb-6 md:grid-cols-12\">\n        <div className=\"md:col-span-5\">\n          <Logo name={name} />\n          <p className=\"mt-4 max-w-[300px] text-[14px] leading-[22px] text-ink-2\">{description}</p>\n          <p className=\"mt-6 inline-flex items-center gap-2 text-[13px] text-ink-2\">\n            <span className=\"size-2 rounded-full bg-positive\" aria-hidden=\"true\" />\n            {status}\n          </p>\n        </div>\n        <nav aria-label={nav} className=\"grid grid-cols-2 gap-8 max-md:hidden md:col-span-6 md:col-start-7 lg:grid-cols-3\">\n          {columns.map((col) => (\n            <div key={col.title}>\n              <p className=\"font-mono text-[11px] tracking-[0.14em] text-ink-3 uppercase\">{col.title}</p>\n              <ul className=\"mt-4 grid gap-2.5\">\n                {col.links.map((l) => (\n                  <li key={l.label}>\n                    <a href={l.href} className=\"text-[14px] text-ink-2 transition-colors hover:text-ink\">\n                      {l.label}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </div>\n          ))}\n        </nav>\n        {/* phones: each column folds away; tap a heading to open it */}\n        <nav aria-label={nav} className=\"grid gap-1 md:hidden\">\n          {columns.map((col) => (\n            <details key={col.title} className=\"group rounded-2xl open:bg-white/[0.03]\">\n              <summary className=\"flex h-14 cursor-pointer list-none items-center justify-between px-4 [&::-webkit-details-marker]:hidden\">\n                <span className=\"font-mono text-[12px] tracking-[0.14em] text-ink-2 uppercase\">{col.title}</span>\n                <Plus className=\"size-4 text-ink-3 transition-transform duration-300 group-open:rotate-45\" strokeWidth={1.75} aria-hidden=\"true\" />\n              </summary>\n              <ul className=\"px-4 pb-3\">\n                {col.links.map((l) => (\n                  <li key={l.label}>\n                    <a href={l.href} className=\"block py-3 text-[15px] text-ink-2\">\n                      {l.label}\n                    </a>\n                  </li>\n                ))}\n              </ul>\n            </details>\n          ))}\n        </nav>\n      </div>\n      <div className=\"container-x flex flex-col gap-2 pb-6 text-[13px] text-ink-3 sm:flex-row sm:items-center sm:gap-6\">\n        <p className=\"num\">\n          © {year} {legalName}\n        </p>\n        <a href={`mailto:${email}`} className=\"hover:text-ink max-md:inline-flex max-md:min-h-11 max-md:items-center\">\n          {email}\n        </a>\n        {credit && (\n          <a href={credit.href} className=\"hover:text-ink max-md:inline-flex max-md:min-h-11 max-md:items-center sm:ml-auto\">\n            {credit.label}\n          </a>\n        )}\n      </div>\n      {/* the name, set large and fading into the night */}\n      <p\n        aria-hidden=\"true\"\n        className=\"pointer-events-none -mb-[0.2em] text-center font-serif text-[clamp(96px,24vw,360px)] leading-[0.9] font-[340] tracking-[-0.04em] text-transparent select-none [background-clip:text] [background-image:linear-gradient(to_bottom,color-mix(in_oklab,var(--brand)_32%,transparent),transparent_85%)] max-md:text-[30vw]\"\n      >\n        {name}\n      </p>\n    </footer>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/footer.tsx"
+    },
+    {
+      "path": "src/components/site/logo.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n/** Wordmark: the product name in Fraunces, no symbol. */\nexport function Logo({ name, className }: { name: string; className?: string }) {\n  return <span className={cn(\"font-serif text-[25px] leading-none font-[380] tracking-[-0.02em]\", className)}>{name}</span>\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/logo.tsx"
+    }
+  ],
+  "docs": "The block takes its words as props; the types sit at the top of the file. Add midnight-theme on its own first, so it can set your page colours.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn",
+  "categories": [
+    "footer"
+  ],
+  "type": "registry:block"
+}

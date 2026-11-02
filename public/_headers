@@ -1,0 +1,13 @@
+# Headers for Cloudflare Pages and Netlify (both read this file from the built site). Vercel uses vercel.json.
+# Basic security headers on every page; the page may be framed only by the site itself.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Content-Security-Policy: frame-ancestors 'self'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
+  Strict-Transport-Security: max-age=31536000
+
+# built files carry a content hash in their name, so they can be cached for a year
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -1,0 +1,8 @@
+---
+description: How to work on the Midnight Lite landing template
+alwaysApply: true
+---
+
+Before changing anything, read AGENTS.md and DESIGN.md at the repository root and follow them: every word lives in
+src/content/site.ts and reaches the sections as props, dark theme with one accent per block, phone-only changes
+behind max-md: without moving the desktop, and `npm run check` must pass before you finish.

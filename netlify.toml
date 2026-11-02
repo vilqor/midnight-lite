@@ -1,0 +1,11 @@
+# Netlify: build the static export and publish /out.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  # the site is fully static; Netlify's Next.js runtime is not needed
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
+  NODE_VERSION = "22"
+
+# headers (security, caching) are in public/_headers, which Netlify reads from the built site

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "midnight-night-sky",
+  "title": "Night sky",
+  "author": "Vilqor <https://vilqor.com>",
+  "description": "A seeded star field with twinkling stars and rare shooting stars, drawn in the browser after load; the motion stops for people who ask for reduced motion.",
+  "registryDependencies": [
+    "utils",
+    "https://midnight-lite.vilqor.com/r/midnight-theme.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/site/night-sky.tsx",
+      "content": "\"use client\"\n\nimport { seeded } from \"@/lib/seeded\"\nimport { useMounted } from \"@/hooks/use-mounted\"\nimport { cn } from \"@/lib/utils\"\n\nconst W = 1440\nconst H = 900\n\nfunction makeStars(count: number, seed: number) {\n  const rnd = seeded(seed)\n  return Array.from({ length: count }, (_, i) => ({\n    x: +(rnd() * W).toFixed(1),\n    y: +(rnd() * H).toFixed(1),\n    r: +(0.45 + rnd() ** 3 * 1.1).toFixed(2),\n    o: +(0.25 + rnd() * 0.6).toFixed(2),\n    twinkle: i % 7 === 0,\n    delay: +(rnd() * 4.5).toFixed(2),\n  }))\n}\n\n// Four-point sparkles: the few bright stars, placed by hand around the middle of the frame.\nconst SPARKLES = [\n  { x: 300, y: 250, s: 6, delay: 0 },\n  { x: 1180, y: 150, s: 5, delay: 1.6 },\n  { x: 1110, y: 600, s: 4, delay: 2.8 },\n  { x: 430, y: 640, s: 5, delay: 3.6 },\n]\n\nconst sparkle = (s: number) => `M0 ${-s}Q0 0 ${s} 0Q0 0 0 ${s}Q0 0 ${-s} 0Q0 0 0 ${-s}Z`\n\nconst METEORS = [\n  { top: \"-4%\", left: \"14%\", delay: \"0.6s\" },\n  { top: \"4%\", left: \"44%\", delay: \"5s\" },\n  { top: \"-6%\", left: \"66%\", delay: \"9.4s\" },\n]\n\ntype NightSkyProps = {\n  className?: string\n  style?: React.CSSProperties\n  count?: number\n  seed?: number\n  sparkles?: boolean\n  meteors?: boolean\n}\n\n/** A quiet night sky: seeded stars, a few that twinkle, hand-placed sparkles and rare shooting stars.\n *  Decorative only: the browser draws it once the page is up and it fades in; at rest it is a still sky. */\nexport function NightSky({ className, style, count = 110, seed = 7, sparkles = true, meteors = true }: NightSkyProps) {\n  const mounted = useMounted()\n  const stars = mounted ? makeStars(count, seed) : []\n  return (\n    <div aria-hidden=\"true\" className={cn(\"pointer-events-none overflow-hidden select-none\", className)} style={style}>\n      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio=\"xMidYMid slice\" className=\"absolute inset-0 size-full\">\n        <g fill=\"var(--night-ink)\" className=\"ornament-in\">\n          {stars.map((s, i) => (\n            <circle\n              key={i}\n              cx={s.x}\n              cy={s.y}\n              r={s.r}\n              fillOpacity={s.o}\n              className={s.twinkle ? \"twinkle\" : undefined}\n              style={s.twinkle ? { animationDelay: `${s.delay}s` } : undefined}\n            />\n          ))}\n        </g>\n        {sparkles && mounted && (\n          <g fill=\"var(--brand-on-ink)\" className=\"ornament-in max-lg:hidden\">\n            {SPARKLES.map((s, i) => (\n              <path key={i} d={sparkle(s.s)} transform={`translate(${s.x} ${s.y})`} className=\"twinkle\" style={{ animationDelay: `${s.delay}s` }} />\n            ))}\n          </g>\n        )}\n      </svg>\n      {meteors &&\n        mounted &&\n        METEORS.map((m, i) => <span key={i} className=\"meteor\" style={{ top: m.top, left: m.left, animationDelay: m.delay }} />)}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/night-sky.tsx"
+    },
+    {
+      "path": "src/lib/seeded.ts",
+      "content": "// Seeded random numbers, so every load draws the same sky.\nexport function seeded(seed: number) {\n  return () => {\n    seed = (seed + 0x6d2b79f5) | 0\n    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)\n    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t\n    return ((t ^ (t >>> 14)) >>> 0) / 4294967296\n  }\n}\n",
+      "type": "registry:lib",
+      "target": "@lib/seeded.ts"
+    },
+    {
+      "path": "src/hooks/use-mounted.ts",
+      "content": "import { useSyncExternalStore } from \"react\"\n\nconst subscribe = () => () => {}\n\n/** False on the server and while the page hydrates, true once it runs in the browser.\n *  For decoration the browser can draw itself, so it stays out of the HTML. */\nexport const useMounted = () =>\n  useSyncExternalStore(\n    subscribe,\n    () => true,\n    () => false,\n  )\n",
+      "type": "registry:hook",
+      "target": "@hooks/use-mounted.ts"
+    }
+  ],
+  "categories": [
+    "background"
+  ],
+  "type": "registry:component"
+}

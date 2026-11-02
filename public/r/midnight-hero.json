@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "midnight-hero",
+  "title": "Midnight hero",
+  "author": "Vilqor <https://vilqor.com>",
+  "description": "A dark hero with a serif display title and a gold accent line, a lead and two buttons over a star field and a guilloche rosette, set from the left on phones.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "utils",
+    "https://midnight-lite.vilqor.com/r/midnight-theme.json",
+    "https://midnight-lite.vilqor.com/r/midnight-night-sky.json",
+    "https://midnight-lite.vilqor.com/r/midnight-guilloche.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/site/hero.tsx",
+      "content": "import { ArrowRight } from \"lucide-react\"\n\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\nimport { GuillocheSpiral } from \"./guilloche\"\nimport { NightSky } from \"./night-sky\"\nimport { StarGlyph } from \"./section-head\"\n\nexport type HeroContent = {\n  /** the line above the title, shown on phones */\n  tagline: string\n  /** the title in two parts; `accent` is set in italic gold */\n  title: { lead: string; accent: string }\n  lead: string\n  /** a shorter lead for phones */\n  leadShort: string\n  primary: { label: string; href: string }\n  secondary: { label: string; href: string }\n}\n\n/** The opening: a serif title with a gold accent line over a night sky and an engraved rosette.\n *  Phones read it like an editorial page, set from the left. `children` sit under the buttons:\n *  a place for your own product picture. */\nexport function Hero({ tagline, title, lead, leadShort, primary, secondary, children }: HeroContent & { children?: React.ReactNode }) {\n  return (\n    <section id=\"top\" className=\"relative overflow-x-clip pt-36 pb-20 max-md:pt-28 max-md:pb-14 md:pt-48 md:pb-32 [@media(max-height:520px)_and_(max-width:1023px)]:pt-24\">\n      {/* the sky, and one rosette at the left edge, lit on the side that faces the title */}\n      <NightSky className=\"absolute inset-x-0 top-0 h-[1000px] [mask-image:linear-gradient(to_bottom,black_50%,transparent)]\" />\n      <div aria-hidden=\"true\" className=\"absolute top-8 -right-48 size-[360px] opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_40%)] md:hidden\">\n        <GuillocheSpiral id=\"g-hero-m\" className=\"size-full\" />\n      </div>\n      <div aria-hidden=\"true\" className=\"absolute top-5 left-[calc(50%-1030px)] hidden size-[620px] md:block\">\n        <GuillocheSpiral id=\"g-hero-a\" className=\"size-full [mask-image:linear-gradient(to_right,rgb(0_0_0/0.3)_48%,black_92%)]\" />\n      </div>\n\n      <div className=\"container-x relative text-center max-md:text-left\">\n        <p className=\"eyebrow-star max-[380px]:text-[11px] max-[380px]:tracking-[0.1em] md:hidden\">\n          <StarGlyph /> {tagline}\n        </p>\n        <h1 className=\"display mx-auto max-w-[1000px] text-[clamp(54px,8.6vw,126px)] max-md:mt-5 max-md:text-[clamp(42px,13.4vw,56px)] max-md:leading-[0.98]\">\n          {title.lead} <br className=\"hidden max-sm:block sm:block\" />\n          <em className=\"glint\">{title.accent}</em>\n        </h1>\n        <p className=\"lead mx-auto mt-7 max-w-[720px] text-balance max-md:hidden\">{lead}</p>\n        <p className=\"mt-5 max-w-[330px] text-[16px] leading-[25px] text-ink-2 md:hidden\">{leadShort}</p>\n\n        <div className=\"mt-10 flex flex-wrap items-center justify-center gap-3 max-md:mt-8 max-md:flex-col max-md:items-start max-md:gap-1.5\">\n          <a href={primary.href} className={cn(buttonVariants(), \"shine bg-brand text-paper hover:bg-brand/85 h-12 rounded-full px-6 text-[15px] max-md:h-[52px] max-md:w-full max-md:text-[16px]\")}>\n            {primary.label}\n            <ArrowRight className=\"size-4\" strokeWidth={1.75} />\n          </a>\n          <a href={secondary.href} className={cn(buttonVariants({ variant: \"ghost\" }), \"h-12 rounded-full px-5 text-[15px] text-ink hover:bg-white/5 max-md:h-[52px] max-md:px-0 max-md:hover:bg-transparent\")}>\n            {secondary.label}\n          </a>\n        </div>\n      </div>\n\n      {children && <div className=\"container-x relative mt-16 max-md:mt-12 md:mt-20\">{children}</div>}\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/hero.tsx"
+    },
+    {
+      "path": "src/components/site/section-head.tsx",
+      "content": "import { cn } from \"@/lib/utils\"\n\n/** A small four-point star, the page's section mark. */\nexport function StarGlyph({ className, style }: { className?: string; style?: React.CSSProperties }) {\n  return (\n    <svg viewBox=\"-6 -6 12 12\" className={cn(\"size-2.5\", className)} style={style} aria-hidden=\"true\">\n      <path d=\"M0 -6Q0 0 6 0Q0 0 0 6Q0 0 -6 0Q0 0 0 -6Z\" fill=\"currentColor\" />\n    </svg>\n  )\n}\n\ntype SectionHeadProps = {\n  label: string\n  title: string\n  lead?: string\n  /** split: from lg up the title sits on the left and the lead on the right, level with its last line\n   *  (with no lead the title runs the full width); centred below lg */\n  align?: \"center\" | \"left\" | \"split\"\n  className?: string\n}\n\n/** Section header: a star and a label, the title in Fraunces, an optional lead. */\nexport function SectionHead({ label, title, lead, align = \"center\", className }: SectionHeadProps) {\n  const center = align === \"center\"\n  if (align === \"split\") {\n    return (\n      <div className={cn(\"mx-auto max-w-[760px] text-center lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-12 lg:items-end lg:gap-x-10 lg:text-left\", className)}>\n        <div className={lead ? \"lg:col-span-7\" : \"lg:col-span-12\"}>\n          <p className=\"eyebrow-star\">\n            <StarGlyph />\n            {label}\n          </p>\n          <h2 className=\"h2 mt-5\">{title}</h2>\n        </div>\n        {lead && <p className=\"lead mx-auto mt-5 max-w-[600px] lg:col-span-5 lg:col-start-8 lg:mx-0 lg:mt-0 lg:max-w-none\">{lead}</p>}\n      </div>\n    )\n  }\n  return (\n    <div className={cn(center ? \"mx-auto max-w-[760px] text-center\" : \"max-w-[560px]\", className)}>\n      <p className=\"eyebrow-star\">\n        <StarGlyph />\n        {label}\n      </p>\n      <h2 className=\"h2 mt-5\">{title}</h2>\n      {lead && <p className={cn(\"lead mt-5 max-w-[600px]\", center && \"mx-auto\")}>{lead}</p>}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/section-head.tsx"
+    }
+  ],
+  "docs": "The block takes its words as props; the types sit at the top of the file. Add midnight-theme on its own first, so it can set your page colours.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn",
+  "categories": [
+    "hero"
+  ],
+  "type": "registry:block"
+}

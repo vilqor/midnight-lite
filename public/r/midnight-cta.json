@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "midnight-cta",
+  "title": "Midnight call to action",
+  "author": "Vilqor <https://vilqor.com>",
+  "description": "A closing call to action with a large serif title, an accent word and one button under a field of stars.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "utils",
+    "https://midnight-lite.vilqor.com/r/midnight-theme.json",
+    "https://midnight-lite.vilqor.com/r/midnight-night-sky.json"
+  ],
+  "files": [
+    {
+      "path": "src/components/site/final-cta.tsx",
+      "content": "import { ArrowRight } from \"lucide-react\"\n\nimport { buttonVariants } from \"@/components/ui/button\"\nimport { cn } from \"@/lib/utils\"\nimport { NightSky } from \"./night-sky\"\n\nexport type FinalCtaContent = {\n  /** the title in two parts; `accent` is set in italic gold */\n  title: { lead: string; accent: string }\n  lead: string\n  /** the button: point it at your sign-up page */\n  button: { label: string; href: string }\n  /** a small line under the button */\n  note?: string\n}\n\n/** The closing call to action: a large serif title with an accent word, one button, stars and soft light. */\nexport function FinalCta({ title, lead, button, note }: FinalCtaContent) {\n  return (\n    <section id=\"start\" className=\"relative overflow-hidden\">\n      <NightSky className=\"absolute inset-0 [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_60%,transparent)]\" count={90} seed={41} />\n      <div aria-hidden=\"true\" className=\"glow-center absolute inset-0\" />\n      <div className=\"container-x relative pt-16 pb-28 text-center max-md:pt-12 max-md:pb-20 md:pt-24 md:pb-36\">\n        <h2 className=\"display mx-auto max-w-[900px] text-[clamp(48px,7vw,104px)] max-md:text-[clamp(42px,13vw,56px)]\">\n          {title.lead} <em className=\"glint\">{title.accent}</em>\n        </h2>\n        <p className=\"lead mx-auto mt-6 max-w-[520px]\">{lead}</p>\n        <a href={button.href} className={cn(buttonVariants(), \"shine bg-brand text-paper hover:bg-brand/85 mt-10 h-12 rounded-full px-7 text-[15px] max-md:h-[52px] max-md:w-full max-md:text-[16px]\")}>\n          {button.label}\n          <ArrowRight className=\"size-4\" strokeWidth={1.75} />\n        </a>\n        {note && <p className=\"num mt-4 text-[12px] text-ink-3\">{note}</p>}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "@components/midnight/final-cta.tsx"
+    }
+  ],
+  "docs": "The block takes its words as props; the types sit at the top of the file. Add midnight-theme on its own first, so it can set your page colours.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn",
+  "categories": [
+    "cta"
+  ],
+  "type": "registry:block"
+}

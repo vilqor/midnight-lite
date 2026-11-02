@@ -1,0 +1,482 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ───────────────────────────── Theme tokens ─────────────────────────────
+   One theme: Midnight, dark only, with one accent (champagne). To rebrand, change --brand and --brand-ink;
+   soft fills, lines and the glint are mixed from --brand, so they follow it. */
+
+:root {
+  /* night surfaces, from the sky up */
+  --paper: #0b1020;
+  --surface: #111731;
+  --surface-2: #182039;
+  --line: #242c4b;
+  --line-strong: #343d63;
+  /* text */
+  --ink: #ece9e1;
+  --ink-2: #a9afc4;
+  --ink-3: #8f96ad;
+  --on-ink: #0b1020;
+  /* meaning */
+  --signal: #ef7a63;
+  --signal-ink: #f59784;
+  --signal-soft: #3a2127;
+  --positive: #7cc49b;
+  --positive-ink: #8fd0aa;
+  --positive-soft: #172b2b;
+  /* accent (champagne) */
+  --brand: #d9b77e;
+  --brand-ink: #e3c592; /* accent as small text */
+  --brand-on-ink: var(--brand);
+  --brand-soft: color-mix(in oklab, var(--brand) 16%, var(--surface));
+  --brand-line: color-mix(in oklab, var(--brand) 45%, var(--paper));
+  --brand-glint: color-mix(in oklab, var(--brand) 35%, white); /* the light that runs over gold */
+  /* the deepest night */
+  --night: #070a16;
+  --night-ink: #ece9e1;
+
+  /* the card material: deep and even, a touch lighter at the top, held by a crisp inner edge */
+  --tile-bg: linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, var(--paper)), color-mix(in oklab, var(--surface) 62%, var(--paper)));
+  --card-edge: inset 0 1px 0 0 rgb(255 255 255 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.045);
+
+  /* card shadows: short and soft. On a night background a long, strong shadow spans only a few shades
+     and shows as visible steps; these stay smooth */
+  --card-shadow: 0 1px 1px rgb(0 0 0 / 0.25), 0 14px 28px -18px rgb(0 0 0 / 0.55);
+  --card-shadow-lifted: 0 2px 2px rgb(0 0 0 / 0.25), 0 24px 44px -22px rgb(0 0 0 / 0.65);
+
+  /* shadcn mapping: at night the primary action is the accent itself */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--brand);
+  --primary-foreground: var(--paper);
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--ink-2);
+  --accent: var(--surface-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--signal);
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--brand);
+  --radius: 0.75rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-on-ink: var(--on-ink);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-on-ink: var(--brand-on-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-line: var(--brand-line);
+  --color-brand-glint: var(--brand-glint);
+  --color-night: var(--night);
+  --color-night-ink: var(--night-ink);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-signal-soft: var(--signal-soft);
+  --color-positive: var(--positive);
+  --color-positive-ink: var(--positive-ink);
+  --color-positive-soft: var(--positive-soft);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-heading: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--brand-soft);
+    color: var(--ink);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+@layer components {
+  /* layout */
+  .container-x {
+    @apply mx-auto w-full max-w-[1200px] px-6 max-[380px]:px-5 md:px-10;
+  }
+  /* type: Fraunces for display, soft corners at large sizes */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 340;
+    font-variation-settings: "SOFT" 60, "opsz" 144;
+    font-size: clamp(52px, 7.2vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+  .h2 {
+    font-family: var(--font-serif);
+    font-weight: 350;
+    font-variation-settings: "SOFT" 50;
+    font-size: clamp(38px, 4.6vw, 64px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .h3 {
+    @apply text-[17px] leading-6 font-medium tracking-[-0.01em];
+  }
+  .lead {
+    @apply text-[17px] leading-7 text-ink-2 md:text-[19px] md:leading-[30px];
+    text-wrap: pretty;
+  }
+  .eyebrow {
+    @apply font-mono text-[12px] leading-4 tracking-[0.14em] text-ink-2 uppercase;
+  }
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  /* surfaces: the one card material of the page. Matte, lighter toward the top, no drawn edge. */
+  .panel {
+    border-radius: 1.5rem;
+    background: var(--tile-bg);
+    box-shadow: var(--card-edge), var(--card-shadow);
+  }
+  .glass {
+    position: relative;
+    background: color-mix(in oklab, var(--surface) 72%, transparent);
+    @apply backdrop-blur-xl backdrop-saturate-150;
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.05),
+      0 2px 6px -2px rgb(0 0 0 / 0.45),
+      0 16px 36px -14px rgb(0 0 0 / 0.75);
+  }
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.16),
+      rgb(255 255 255 / 0.04) 55%,
+      color-mix(in oklab, var(--brand) 22%, transparent)
+    );
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+  .eyebrow-star {
+    @apply inline-flex items-center gap-2 font-mono text-[12px] leading-4 tracking-[0.16em] text-brand-ink uppercase;
+  }
+}
+
+/* Grain: a fixed, almost invisible noise over the whole page. Dark gradients, glows and soft shadows
+   span only a few shades here; the noise dithers them so they read smooth instead of in steps. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ───────────────────────────── Magic layer ─────────────────────────────
+   Decorative light and motion. Nothing here hides content: every effect has a visible
+   resting state, so screenshots, previews and background tabs look finished.
+   All motion stops for prefers-reduced-motion. */
+
+/* Gold that catches the light: gradient text with a slow glint. */
+.glint {
+  background: linear-gradient(100deg, var(--brand) 0 38%, var(--brand-glint) 50%, var(--brand) 62% 100%);
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  /* room for italic overhang, so the last letter is not clipped */
+  padding-right: 0.1em;
+  margin-right: -0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* A sheen that sweeps across a button, between its fill and its label. */
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+  transform: translateX(-120%);
+}
+
+/* The menu's lit pill: no drawn edge, just light. A faint fill, a highlight along the top
+   and a warm glow rising from below, like a lamp under the word. */
+.nav-lit {
+  background:
+    radial-gradient(70% 110% at 50% 125%, color-mix(in oklab, var(--brand) 30%, transparent), transparent 72%),
+    rgb(255 255 255 / 0.05);
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.1);
+}
+
+/* A glow that lives inside its section and fades out before every edge. */
+.glow-center {
+  pointer-events: none;
+  background: radial-gradient(
+    circle closest-side at 50% 50%,
+    color-mix(in oklab, var(--brand) 6.5%, transparent) 0%,
+    color-mix(in oklab, var(--brand) 5%, transparent) 22%,
+    color-mix(in oklab, var(--brand) 3.2%, transparent) 42%,
+    color-mix(in oklab, var(--brand) 1.6%, transparent) 62%,
+    color-mix(in oklab, var(--brand) 0.5%, transparent) 82%,
+    transparent 100%
+  );
+}
+
+/* Large cards: the same material with a larger radius. */
+.tile {
+  border-radius: 32px;
+  background: var(--tile-bg);
+  box-shadow: var(--card-edge), var(--card-shadow);
+}
+
+/* Shooting stars: invisible between passes, decorative only. */
+.meteor {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 9999px;
+  background: var(--brand-glint);
+  box-shadow: 0 0 6px 1px color-mix(in oklab, var(--brand) 60%, transparent);
+  rotate: 215deg;
+  opacity: 0;
+  pointer-events: none;
+}
+.meteor::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  width: 150px;
+  height: 1px;
+  translate: 0 -50%;
+  background: linear-gradient(90deg, var(--brand-glint), transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* ornaments are drawn once the page is up; they fade in instead of popping */
+  .ornament-in {
+    animation: ornament-in 0.9s ease-out both;
+  }
+  .glint {
+    animation: glint 7s ease-in-out infinite 1s;
+  }
+  .shine::after {
+    animation: shine 5.5s ease-in-out infinite 1.5s;
+  }
+  .twinkle {
+    animation: twinkle 4.5s ease-in-out infinite;
+  }
+  .glint-run {
+    animation: glint-run 14s linear infinite;
+  }
+  .glint-run-slow {
+    animation-duration: 30s;
+  }
+  .meteor {
+    animation: meteor 13s linear infinite;
+  }
+}
+
+/* A spark of light travelling along a guilloche line. Invisible at rest. */
+.glint-run {
+  stroke-dasharray: 2.5 97.5;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px var(--brand));
+}
+
+@keyframes ornament-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes glint {
+  0% {
+    background-position: 100% 0;
+  }
+  40%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+@keyframes shine {
+  0% {
+    transform: translateX(-120%);
+  }
+  35%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@keyframes meteor {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  1% {
+    opacity: 1;
+  }
+  11% {
+    opacity: 0;
+    transform: translateX(-680px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-680px);
+  }
+}
+@keyframes glint-run {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  6%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0;
+  }
+}
+
+/* ───────────────────────────── Phone ─────────────────────────────
+   Everything below changes phones only; the desktop layout is untouched. */
+
+/* iPhone WebKit can draw the variable Fraunces at its heaviest instance and ignore font-weight.
+   Naming the weight axis explicitly pins every serif to the weight we set. -webkit-touch-callout
+   exists only on iOS, so no other browser reads these rules. */
+@supports (-webkit-touch-callout: none) {
+  .font-serif {
+    font-variation-settings: "wght" var(--fw, 400);
+  }
+  .font-\[340\] {
+    --fw: 340;
+  }
+  .font-\[350\] {
+    --fw: 350;
+  }
+  .font-\[380\] {
+    --fw: 380;
+  }
+  .font-\[600\] {
+    --fw: 600;
+  }
+  .display {
+    font-variation-settings: "wght" 340, "SOFT" 60, "opsz" 144;
+  }
+  .h2 {
+    font-variation-settings: "wght" 350, "SOFT" 50;
+  }
+}
+
+/* Phones: lighter rendering. No grain layer (it repaints the whole screen on scroll and makes the page
+   a shade lighter than the strip Safari paints under the clock) and no repainting sparkle animations.
+   The desktop keeps all of it. */
+@media (width < 48rem) {
+  body::after {
+    display: none;
+  }
+  .twinkle,
+  .glint-run,
+  .meteor {
+    animation: none !important;
+  }
+}
+
+/* Landscape phones: keep content out of the notch (zero everywhere else). */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
