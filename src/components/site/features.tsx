@@ -43,7 +43,7 @@ function ResearchArt({ r }: { r: FeaturesContent["research"] }) {
       </p>
       <ul className="grid gap-2 [mask-image:linear-gradient(to_bottom,black_70%,transparent)]">
         {r.rows.map((row) => (
-          <li key={row.title} className="flex items-center gap-3 rounded-xl bg-paper/60 px-3.5 py-2.5">
+          <li key={row.title} className="flex min-w-0 items-center gap-3 rounded-xl bg-paper/60 px-3.5 py-2.5">
             <FileText className="size-4 shrink-0 text-ink-3" strokeWidth={1.75} />
             <span className="min-w-0 flex-1 truncate text-[13.5px] text-ink">{row.title}</span>
             <span className="num hidden text-[11.5px] text-ink-3 sm:block">{row.where}</span>
@@ -79,10 +79,10 @@ function SourcesArt({ s }: { s: FeaturesContent["sources"] }) {
       </p>
       <ol className="mt-4 grid gap-1.5">
         {s.sources.map((src) => (
-          <li key={src.n} className="flex items-baseline gap-2.5 text-[12.5px] leading-5">
+          <li key={src.n} className="flex min-w-0 items-baseline gap-2.5 text-[12.5px] leading-5">
             <span className="num text-brand-ink">{src.n}</span>
             <span className="min-w-0 truncate text-ink-2">{src.title}</span>
-            <span className="ml-auto shrink-0 text-ink-3">{src.where}</span>
+            <span className="ml-auto shrink-0 text-ink-3 max-sm:hidden">{src.where}</span>
           </li>
         ))}
       </ol>

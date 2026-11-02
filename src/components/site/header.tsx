@@ -12,6 +12,8 @@ export type HeaderContent = {
   name: string
   /** section links, shown from 768 px: "/#product" scrolls on the home page and leads home from other pages */
   nav: { label: string; href: string }[]
+  /** a quiet text link left of the button, shown from 1024 px, where it fits without moving the links off centre */
+  link?: { label: string; href: string } | null
   /** the one button; `short` is its label on phones */
   cta: { label: string; short: string; href: string }
   /** the logo link's name for screen readers; {name} is filled in */
@@ -28,7 +30,7 @@ const idOf = (href: string) => href.split("#")[1] ?? ""
 /** Open at the top of the page; once you scroll it gathers into a floating glass island.
  *  Three columns keep the links on the page's centre line whatever sits left and right.
  *  One lit pill moves under the links: to the one you point at, otherwise to the section you are reading. */
-export function Header({ name, nav, cta, backToTop }: HeaderContent) {
+export function Header({ name, nav, link: aside, cta, backToTop }: HeaderContent) {
   const [island, setIsland] = useState(false)
   const listRef = useRef<HTMLUListElement>(null)
   const [hoverBox, setHoverBox] = useState<Box | null>(null)
@@ -104,10 +106,17 @@ export function Header({ name, nav, cta, backToTop }: HeaderContent) {
           </ul>
         </nav>
 
-        <a href={cta.href} className={cn(buttonVariants(), "shine bg-brand text-paper hover:bg-brand/85 h-10 justify-self-end rounded-full px-5 text-[14px] max-md:h-11 max-sm:px-4")}>
-          <span className="sm:hidden">{cta.short}</span>
-          <span className="max-sm:hidden">{cta.label}</span>
-        </a>
+        <div className="flex items-center gap-1 justify-self-end">
+          {aside && (
+            <a href={aside.href} className={cn(link, "whitespace-nowrap text-ink-2 max-lg:hidden")}>
+              {aside.label}
+            </a>
+          )}
+          <a href={cta.href} className={cn(buttonVariants(), "shine bg-brand text-paper hover:bg-brand/85 h-10 rounded-full px-5 text-[14px] max-md:h-11 max-sm:px-4")}>
+            <span className="sm:hidden">{cta.short}</span>
+            <span className="max-sm:hidden">{cta.label}</span>
+          </a>
+        </div>
       </div>
     </header>
   )

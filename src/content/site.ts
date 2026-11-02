@@ -17,8 +17,10 @@ export const site = {
       { label: "Product", href: "/#product" },
       { label: "Get started", href: "/#start" },
     ],
+    // a quiet text link left of the button, shown from 1024 px; set it to null to remove it
+    link: { label: "Full template · $59", href: "https://templates.vilqor.com/midnight?ref=lite" } as { label: string; href: string } | null,
     // the one button in the header; point it at your sign-up page
-    cta: { label: "Get the full version", short: "Full version", href: "https://templates.vilqor.com/midnight?ref=lite" },
+    cta: { label: "Start free", short: "Start free", href: "/#start" },
     backToTop: "{name}, back to top",
   },
 
@@ -107,6 +109,8 @@ export const site = {
   } as { text: string; link: { label: string; href: string } } | null,
 
   footer: {
+    // the year in the © line; change it each January
+    year: 2026,
     status: "All agents awake",
     nav: "Footer",
     // "#" marks pages the template doesn't include; point them at yours

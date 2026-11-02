@@ -29,7 +29,7 @@ Open http://localhost:3000. Then make it yours:
 
 1. Rewrite the name and copy in `src/content/site.ts`.
 2. Point the buttons at your sign-up page: `header.cta`, `hero.primary` and `final.button` in `site.ts`.
-3. Remove the line about this template above the footer: set `note` in `site.ts` to `null`.
+3. Remove the links to the full template: set `header.link` and `note` in `site.ts` to `null`.
 4. Pick your accent: `--brand` and `--brand-ink` at the top of `src/app/globals.css`.
 5. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your address.
 6. Replace `public/og.png` with a picture of your page (1200 × 630).
@@ -80,13 +80,16 @@ then run npm run check.
 
 ## Add the blocks to your own project
 
-The sections are also a shadcn registry, `@vilqor`. In a Next.js project with shadcn/ui, add the theme first (it sets
-your page colours), then any block:
+The sections are also a shadcn registry, `@vilqor`. In a Next.js project with shadcn/ui, name the theme in the same
+command as the blocks:
 
 ```bash
-npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json
-npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-hero.json
+npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-hero.json
 ```
+
+The theme has to be named. When it only comes in as a block's dependency, shadcn adds its colours but keeps your
+`--background`, `--primary` and fonts, and the page stays white. If that happened, add the theme on its own:
+`npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json`.
 
 Or add the namespace to `components.json` once and use short names:
 

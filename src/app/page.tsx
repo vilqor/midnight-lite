@@ -22,7 +22,7 @@ export default function Home() {
         <FinalCta {...site.final} />
       </main>
       {site.note && <LiteNote {...site.note} />}
-      <Footer name={site.name} legalName={site.legalName} year={new Date().getFullYear()} description={site.description} email={site.email} {...site.footer} />
+      <Footer name={site.name} legalName={site.legalName} description={site.description} email={site.email} {...site.footer} />
     </>
   )
 }

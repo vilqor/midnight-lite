@@ -28,7 +28,7 @@
       "target": "@components/midnight/section-head.tsx"
     }
   ],
-  "docs": "The block takes its words as props; the types sit at the top of the file. Add midnight-theme on its own first, so it can set your page colours.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn",
+  "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-hero.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn",
   "categories": [
     "hero"
   ],

@@ -5,7 +5,8 @@ import { Logo } from "./logo"
 export type FooterContent = {
   name: string
   legalName: string
-  /** the year in the © line; pass new Date().getFullYear() in a static build, or a number */
+  /** the year in the © line, as a number such as 2026. Don't pass new Date().getFullYear(): with cacheComponents
+   *  (on in new Next.js projects) `next build` stops at a date read during prerendering */
   year: number
   description: string
   email: string
