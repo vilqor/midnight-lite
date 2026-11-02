@@ -100,9 +100,12 @@ export const site = {
     lead: "Start free. Your first brief arrives tomorrow at 7:00.",
     // your sign-up page
     button: { label: "Start free", href: "#" },
-    // where the button goes in the live demo (NEXT_PUBLIC_LITE_DEMO=1), in a new tab; your site uses `button.href`
+    // the button and the line under it in the live demo (NEXT_PUBLIC_LITE_DEMO=1): the full template, in a new tab.
+    // Your site uses `button` and `note`
     demoHref: "https://templates.vilqor.com/midnight?ref=lite",
+    demoLabel: "Get the full template",
     note: "Free plan · No card required",
+    demoNote: "Full Midnight · $59",
   },
 
   // the live demo's line above the footer. Like `header.link`, it shows only in the demo build; set it to null if you like

@@ -13,13 +13,10 @@ seven more sections, working forms, analytics and a second language. See [Lite a
 
 **Stack:** Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Radix) · Lucide
 
-<!-- TODO(owner): the GitHub repository does not exist yet. Replace OWNER below (clone command and Deploy button)
-     with the brand account once it is created, e.g. https://github.com/vilqor/midnight-lite -->
-
 ## Quick start
 
 ```bash
-git clone https://github.com/OWNER/midnight-lite.git my-site
+git clone https://github.com/vilqor/midnight-lite.git my-site
 cd my-site
 npm install
 npm run dev
@@ -42,9 +39,9 @@ The [live demo](https://midnight-lite.vilqor.com) also shows a link to the full 
 it above the footer, and sends the closing button there. That is the demo's own layer in `src/demo/`, built with
 `npm run build:demo` (`NEXT_PUBLIC_LITE_DEMO=1`). Your build never shows it, so you can leave it. To remove it for
 good: delete `src/demo/`; in `src/app/page.tsx` remove the demo imports, `link={demoHeaderLink}` and the `<LiteNote>`
-line, and pass `button={site.final.button}`; in `src/components/site/not-found-page.tsx` remove the import and
+line, and pass `button={site.final.button}` and `note={site.final.note}`; in `src/components/site/not-found-page.tsx` remove the import and
 `link={demoHeaderLink}`; then delete the `build:demo` script in `package.json` and the `header.link`, `note` and
-`final.demoHref` keys in `site.ts`.
+`final.demo*` keys in `site.ts`.
 
 ## What's inside
 
@@ -67,9 +64,7 @@ line, and pass `button={site.final.button}`; in `src/components/site/not-found-p
 
 ## Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FOWNER%2Fmidnight-lite&project-name=midnight-lite&repository-name=midnight-lite)
-
-<!-- TODO(owner): replace OWNER in the Deploy button URL above once the GitHub repository exists -->
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvilqor%2Fmidnight-lite&project-name=midnight-lite&repository-name=midnight-lite)
 
 No environment variables are required: on Vercel and Netlify the site's address is picked up on its own. The site is
 a static export: `npm run build` writes `out/`, which runs on any static host (Netlify, Cloudflare Pages, GitHub Pages,

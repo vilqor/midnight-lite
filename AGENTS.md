@@ -40,7 +40,7 @@ Before any visible change, also read DESIGN.md: the colours, type, surfaces, com
 | Social image | `public/og.png` (1200 × 630), a picture you replace |
 | Site address | `NEXT_PUBLIC_SITE_URL` (see `.env.example`) |
 | The shadcn registry | `registry.json` (source) and `public/r/*.json` (built, committed) |
-| The live demo's extras (header link, note, closing button) | `src/demo/`, off unless `NEXT_PUBLIC_LITE_DEMO=1`; the words are `header.link`, `note` and `final.demoHref` in `site.ts` |
+| The live demo's extras (header link, note, closing button) | `src/demo/`, off unless `NEXT_PUBLIC_LITE_DEMO=1`; the words are `header.link`, `note` and the `final.demo*` keys in `site.ts` |
 
 ## Rules
 

@@ -4,7 +4,7 @@ import { Footer } from "@/components/site/footer"
 import { Header } from "@/components/site/header"
 import { Hero } from "@/components/site/hero"
 import { site } from "@/content/site"
-import { demoHeaderLink, demoNote, finalButton } from "@/demo"
+import { demoHeaderLink, demoNote, finalButton, finalNote } from "@/demo"
 import { LiteNote } from "@/demo/lite-note"
 
 export const metadata = { alternates: { canonical: "/" } }
@@ -21,7 +21,7 @@ export default function Home() {
       <main id="main">
         <Hero {...site.hero} />
         <Features {...site.features} />
-        <FinalCta title={site.final.title} lead={site.final.lead} note={site.final.note} button={finalButton} />
+        <FinalCta title={site.final.title} lead={site.final.lead} note={finalNote} button={finalButton} />
       </main>
       {demoNote && <LiteNote {...demoNote} />}
       <Footer name={site.name} legalName={site.legalName} description={site.description} email={site.email} {...site.footer} />
