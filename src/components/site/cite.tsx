@@ -16,7 +16,8 @@ type CiteProps = {
  *  The tap area is 44 px wide and one line tall, so badges on neighbouring lines don't overlap. */
 export function Cite({ n, title, where, label }: CiteProps) {
   const [open, setOpen] = useState(false)
-  // the trigger is the badge itself (no asChild), so this works with the Radix and the Base UI tooltip alike
+  // the trigger is the badge itself (no asChild) and the content takes only props both tooltips share (no
+  // collisionPadding: Base UI's TooltipContent does not accept it), so this works with the Radix and the Base UI tooltip alike
   return (
     <TooltipProvider>
       <Tooltip open={open} onOpenChange={setOpen}>
@@ -33,7 +34,7 @@ export function Cite({ n, title, where, label }: CiteProps) {
         >
           {n}
         </TooltipTrigger>
-        <TooltipContent side="top" collisionPadding={12} className="max-w-[240px] flex-col items-start gap-0 text-[12px] leading-4 motion-reduce:animate-none">
+        <TooltipContent side="top" className="max-w-[min(240px,calc(100vw-24px))] flex-col items-start gap-0 text-[12px] leading-4 motion-reduce:animate-none">
           <span className="block font-medium">{title}</span>
           <span className="mt-0.5 block opacity-70">{where}</span>
         </TooltipContent>
