@@ -19,7 +19,7 @@ const eslintConfig = defineConfig([
   // Words belong in src/content/site.ts, never in components: text typed straight into JSX is an error,
   // so neither people nor AI editors can scatter copy across files. Symbols are allowed.
   {
-    files: ["src/components/site/**/*.tsx", "src/app/**/*.tsx"],
+    files: ["src/components/site/**/*.tsx", "src/app/**/*.tsx", "src/demo/**/*.tsx"],
     rules: {
       "react/jsx-no-literals": [
         "error",

@@ -23,13 +23,14 @@ export type HeroContent = {
  *  a place for your own product picture. */
 export function Hero({ tagline, title, lead, leadShort, primary, secondary, children }: HeroContent & { children?: React.ReactNode }) {
   return (
-    <section id="top" className="relative overflow-x-clip pt-36 pb-20 max-md:pt-28 max-md:pb-14 md:pt-48 md:pb-32 [@media(max-height:520px)_and_(max-width:1023px)]:pt-24">
-      {/* the sky, and one rosette at the left edge, lit on the side that faces the title */}
+    <section id="top" className="relative overflow-x-clip pt-36 pb-20 max-md:pt-28 max-md:pb-14 md:pt-48 md:pb-32 lg:landscape:flex lg:landscape:min-h-svh lg:landscape:flex-col lg:landscape:justify-center lg:landscape:py-28 [@media(max-height:520px)_and_(max-width:1023px)]:pt-24">
+      {/* the sky, and one rosette at the left edge, lit on the side that faces the title. On landscape screens from
+          1024 px the hero fills the first screen, so the next section's heading never shows half cut at the bottom */}
       <NightSky className="absolute inset-x-0 top-0 h-[1000px] [mask-image:linear-gradient(to_bottom,black_50%,transparent)]" />
       <div aria-hidden="true" className="absolute top-8 -right-48 size-[360px] opacity-60 [mask-image:linear-gradient(to_bottom,transparent,black_40%)] md:hidden">
         <GuillocheSpiral id="g-hero-m" className="size-full" />
       </div>
-      <div aria-hidden="true" className="absolute top-5 left-[calc(50%-1030px)] hidden size-[620px] md:block">
+      <div aria-hidden="true" className="absolute top-5 left-[max(calc(50%-1030px),-340px)] hidden size-[620px] md:block">
         <GuillocheSpiral id="g-hero-a" className="size-full [mask-image:linear-gradient(to_right,rgb(0_0_0/0.3)_48%,black_92%)]" />
       </div>
 
@@ -38,7 +39,7 @@ export function Hero({ tagline, title, lead, leadShort, primary, secondary, chil
           <StarGlyph /> {tagline}
         </p>
         <h1 className="display mx-auto max-w-[1000px] text-[clamp(54px,8.6vw,126px)] max-md:mt-5 max-md:text-[clamp(42px,13.4vw,56px)] max-md:leading-[0.98]">
-          {title.lead} <br className="hidden max-sm:block sm:block" />
+          {title.lead} <br />
           <em className="glint">{title.accent}</em>
         </h1>
         <p className="lead mx-auto mt-7 max-w-[720px] text-balance max-md:hidden">{lead}</p>

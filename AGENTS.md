@@ -20,6 +20,7 @@ Before any visible change, also read DESIGN.md: the colours, type, surfaces, com
 
 - `npm run dev`: dev server on http://localhost:3000
 - `npm run build`: the static site in `out/`
+- `npm run build:demo`: the live demo's build (the demo layer on, framing allowed for catalogs); not for your site
 - `npm run preview`: serves the built `out/` at http://localhost:3000
 - `npm run lint`: ESLint
 - `npm run typecheck`: types only
@@ -39,6 +40,7 @@ Before any visible change, also read DESIGN.md: the colours, type, surfaces, com
 | Social image | `public/og.png` (1200 × 630), a picture you replace |
 | Site address | `NEXT_PUBLIC_SITE_URL` (see `.env.example`) |
 | The shadcn registry | `registry.json` (source) and `public/r/*.json` (built, committed) |
+| The live demo's extras (header link, note, closing button) | `src/demo/`, off unless `NEXT_PUBLIC_LITE_DEMO=1`; the words are `header.link`, `note` and `final.demoHref` in `site.ts` |
 
 ## Rules
 
@@ -48,14 +50,18 @@ Before any visible change, also read DESIGN.md: the colours, type, surfaces, com
 2. Dark theme only. One accent per block: the accent colour (`--brand`, champagne) appears once in a section;
    everything else stays in the neutral ink colours.
 3. Phones are designed on their own. Changes below 768 px go behind `max-md:`, `max-sm:` or `md:hidden` and must
-   not move the desktop layout. Touch targets at least 44 px, nothing that only works on hover. Check 320, 390,
-   768, 1024 and 1440 px.
+   not move the desktop layout. Touch targets at least 44 px on phones and on touch screens (`pointer-coarse:`),
+   nothing that only works on hover. Check 320, 390, 768, 1024 and 1440 px.
 4. Ornaments (the guilloche rosette, the star field) stay in the background and stay quiet. Sections show real
    pieces of the product (UI fragments, lists, controls), not symbolic illustrations, glows or beams.
 5. Copy is plain and specific: no hype words, sentence case in titles.
 6. The site is a static export: no API routes, server actions or middleware.
 7. Components in `src/components/site` are also registry items: they import only `@/components/ui/*`, `@/lib/*`,
-   `@/hooks/*` and each other (`./x`), never `@/content`. The 404 page is the one exception and is not in the registry.
+   `@/hooks/*` and each other (`./x`), never `@/content`. The 404 page (`not-found-page.tsx`) is the one exception
+   there and is not in the registry. `src/demo/` is the live demo's layer, also outside the registry.
+8. Motion stops for `prefers-reduced-motion`: animations go in the "Magic layer" of `globals.css` under
+   `prefers-reduced-motion: no-preference`, and a transition that moves or resizes something gets
+   `motion-reduce:transition-none`.
 
 ## Add a section
 
@@ -78,6 +84,11 @@ npm `dependencies` and its `registryDependencies` (bare names such as `button` a
 URLs such as `https://midnight-lite.vilqor.com/r/midnight-theme.json`). Files install to `@components/midnight/`,
 `@lib/` and `@hooks/` through `target`.
 
+In the theme's `cssVars`, the standard shadcn tokens (`background`, `primary`, `ring`…) are plain colours: shadcn
+copies a `var(...)`, `color-mix(...)` or non-colour value into the project's `@theme inline` as a variable that points
+to itself. Mixed and non-colour values (`brand-soft`, `tile-bg`, `card-shadow`…) live in the theme's `css` under
+`@layer base`, next to the base rules (scrolling, selection, cursor, font smoothing).
+
 To add an item:
 
 1. Make the component self-contained as in rule 7: words as props, imports only from `@/components/ui`, `@/lib`,
@@ -89,8 +100,18 @@ To add an item:
    `@utility <name>`, media queries as plain top-level blocks (the CLI copies nested ones again on every install).
    The same goes for new colour tokens (`cssVars`).
 4. Run `npm run registry:build` and commit `public/r/`. Run `npx shadcn@latest registry validate ./registry.json`.
-5. Check it installs: in a fresh `npx create-next-app` + `npx shadcn init` project, serve `public/` (or the
-   deployed site) and run `npx shadcn add <url>/r/midnight-theme.json`, then the item, then `npx tsc --noEmit`.
+5. Check it installs. The items point at each other through `https://midnight-lite.vilqor.com`, so before that
+   address serves the new files, test from a local copy with the address swapped for a local one:
+
+   ```bash
+   mkdir -p /tmp/vilqor-r/r
+   for f in public/r/*.json; do sed 's#https://midnight-lite.vilqor.com#http://localhost:4000#g' "$f" > "/tmp/vilqor-r/r/${f##*/}"; done
+   npx -y serve@14 /tmp/vilqor-r -l 4000
+   ```
+
+   Then, in a fresh `npx create-next-app@latest` + `npx shadcn@latest init` project (Radix or Base UI style):
+   `npx shadcn@latest add http://localhost:4000/r/midnight-theme.json http://localhost:4000/r/<item>.json`, then
+   `npx tsc --noEmit` and `npx next build`.
 
 ## Before you finish
 

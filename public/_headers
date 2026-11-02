@@ -1,5 +1,6 @@
 # Headers for Cloudflare Pages and Netlify (both read this file from the built site). Vercel uses vercel.json.
 # Basic security headers on every page; the page may be framed only by the site itself.
+# (The live demo's build, npm run build:demo, lets a few catalogs frame it, in its built copy only.)
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

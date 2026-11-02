@@ -6,7 +6,7 @@
 
 /* ───────────────────────────── Theme tokens ─────────────────────────────
    One theme: Midnight, dark only, with one accent (champagne). To rebrand, change --brand and --brand-ink;
-   soft fills, lines and the glint are mixed from --brand, so they follow it. */
+   the soft fill and the glint are mixed from --brand, so they follow it. */
 
 :root {
   /* night surfaces, from the sky up */
@@ -19,24 +19,16 @@
   --ink: #ece9e1;
   --ink-2: #a9afc4;
   --ink-3: #8f96ad;
-  --on-ink: #0b1020;
-  /* meaning */
-  --signal: #ef7a63;
-  --signal-ink: #f59784;
-  --signal-soft: #3a2127;
+  /* the stars */
+  --night-ink: #ece9e1;
+  /* done / success only */
   --positive: #7cc49b;
-  --positive-ink: #8fd0aa;
-  --positive-soft: #172b2b;
   /* accent (champagne) */
   --brand: #d9b77e;
   --brand-ink: #e3c592; /* accent as small text */
   --brand-on-ink: var(--brand);
   --brand-soft: color-mix(in oklab, var(--brand) 16%, var(--surface));
-  --brand-line: color-mix(in oklab, var(--brand) 45%, var(--paper));
   --brand-glint: color-mix(in oklab, var(--brand) 35%, white); /* the light that runs over gold */
-  /* the deepest night */
-  --night: #070a16;
-  --night-ink: #ece9e1;
 
   /* the card material: deep and even, a touch lighter at the top, held by a crisp inner edge */
   --tile-bg: linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, var(--paper)), color-mix(in oklab, var(--surface) 62%, var(--paper)));
@@ -45,7 +37,6 @@
   /* card shadows: short and soft. On a night background a long, strong shadow spans only a few shades
      and shows as visible steps; these stay smooth */
   --card-shadow: 0 1px 1px rgb(0 0 0 / 0.25), 0 14px 28px -18px rgb(0 0 0 / 0.55);
-  --card-shadow-lifted: 0 2px 2px rgb(0 0 0 / 0.25), 0 24px 44px -22px rgb(0 0 0 / 0.65);
 
   /* shadcn mapping: at night the primary action is the accent itself */
   --background: var(--paper);
@@ -62,7 +53,7 @@
   --muted-foreground: var(--ink-2);
   --accent: var(--surface-2);
   --accent-foreground: var(--ink);
-  --destructive: var(--signal);
+  --destructive: #ef7a63;
   --border: var(--line);
   --input: var(--line-strong);
   --ring: var(--brand);
@@ -97,21 +88,13 @@
   --color-ink: var(--ink);
   --color-ink-2: var(--ink-2);
   --color-ink-3: var(--ink-3);
-  --color-on-ink: var(--on-ink);
   --color-brand: var(--brand);
   --color-brand-ink: var(--brand-ink);
   --color-brand-on-ink: var(--brand-on-ink);
   --color-brand-soft: var(--brand-soft);
-  --color-brand-line: var(--brand-line);
   --color-brand-glint: var(--brand-glint);
-  --color-night: var(--night);
   --color-night-ink: var(--night-ink);
-  --color-signal: var(--signal);
-  --color-signal-ink: var(--signal-ink);
-  --color-signal-soft: var(--signal-soft);
   --color-positive: var(--positive);
-  --color-positive-ink: var(--positive-ink);
-  --color-positive-soft: var(--positive-soft);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -181,25 +164,13 @@
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
-  .h3 {
-    @apply text-[17px] leading-6 font-medium tracking-[-0.01em];
-  }
   .lead {
     @apply text-[17px] leading-7 text-ink-2 md:text-[19px] md:leading-[30px];
     text-wrap: pretty;
   }
-  .eyebrow {
-    @apply font-mono text-[12px] leading-4 tracking-[0.14em] text-ink-2 uppercase;
-  }
   .num {
     font-family: var(--font-mono);
     font-variant-numeric: tabular-nums;
-  }
-  /* surfaces: the one card material of the page. Matte, lighter toward the top, no drawn edge. */
-  .panel {
-    border-radius: 1.5rem;
-    background: var(--tile-bg);
-    box-shadow: var(--card-edge), var(--card-shadow);
   }
   .glass {
     position: relative;
@@ -444,14 +415,8 @@ body::after {
   .font-\[340\] {
     --fw: 340;
   }
-  .font-\[350\] {
-    --fw: 350;
-  }
   .font-\[380\] {
     --fw: 380;
-  }
-  .font-\[600\] {
-    --fw: 600;
   }
   .display {
     font-variation-settings: "wght" 340, "SOFT" 60, "opsz" 144;

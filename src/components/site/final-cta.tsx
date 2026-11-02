@@ -8,8 +8,8 @@ export type FinalCtaContent = {
   /** the title in two parts; `accent` is set in italic gold */
   title: { lead: string; accent: string }
   lead: string
-  /** the button: point it at your sign-up page */
-  button: { label: string; href: string }
+  /** the button: point it at your sign-up page; `newTab` opens it in a new tab */
+  button: { label: string; href: string; newTab?: boolean }
   /** a small line under the button */
   note?: string
 }
@@ -25,7 +25,12 @@ export function FinalCta({ title, lead, button, note }: FinalCtaContent) {
           {title.lead} <em className="glint">{title.accent}</em>
         </h2>
         <p className="lead mx-auto mt-6 max-w-[520px]">{lead}</p>
-        <a href={button.href} className={cn(buttonVariants(), "shine bg-brand text-paper hover:bg-brand/85 mt-10 h-12 rounded-full px-7 text-[15px] max-md:h-[52px] max-md:w-full max-md:text-[16px]")}>
+        <a
+          href={button.href}
+          target={button.newTab ? "_blank" : undefined}
+          rel={button.newTab ? "noopener" : undefined}
+          className={cn(buttonVariants(), "shine bg-brand text-paper hover:bg-brand/85 mt-10 h-12 rounded-full px-7 text-[15px] max-md:h-[52px] max-md:w-full max-md:text-[16px]")}
+        >
           {button.label}
           <ArrowRight className="size-4" strokeWidth={1.75} />
         </a>

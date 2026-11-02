@@ -22,17 +22,12 @@
           "color-ink": "var(--ink)",
           "color-ink-2": "var(--ink-2)",
           "color-ink-3": "var(--ink-3)",
-          "color-on-ink": "var(--on-ink)",
           "color-positive": "var(--positive)",
-          "color-positive-ink": "var(--positive-ink)",
-          "color-positive-soft": "var(--positive-soft)",
           "color-brand": "var(--brand)",
           "color-brand-ink": "var(--brand-ink)",
           "color-brand-on-ink": "var(--brand-on-ink)",
           "color-brand-soft": "var(--brand-soft)",
-          "color-brand-line": "var(--brand-line)",
           "color-brand-glint": "var(--brand-glint)",
-          "color-night": "var(--night)",
           "color-night-ink": "var(--night-ink)",
           "font-sans": "var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif",
           "font-serif": "var(--font-fraunces), ui-serif, Georgia, serif",
@@ -49,38 +44,28 @@
           "ink": "#ece9e1",
           "ink-2": "#a9afc4",
           "ink-3": "#8f96ad",
-          "on-ink": "#0b1020",
           "positive": "#7cc49b",
-          "positive-ink": "#8fd0aa",
-          "positive-soft": "#172b2b",
           "brand": "#d9b77e",
           "brand-ink": "#e3c592",
-          "brand-on-ink": "var(--brand)",
-          "brand-soft": "color-mix(in oklab, var(--brand) 16%, var(--surface))",
-          "brand-line": "color-mix(in oklab, var(--brand) 45%, var(--paper))",
-          "brand-glint": "color-mix(in oklab, var(--brand) 35%, white)",
-          "night": "#070a16",
           "night-ink": "#ece9e1",
-          "tile-bg": "linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, var(--paper)), color-mix(in oklab, var(--surface) 62%, var(--paper)))",
-          "card-edge": "inset 0 1px 0 0 rgb(255 255 255 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.045)",
-          "card-shadow": "0 1px 1px rgb(0 0 0 / 0.25), 0 14px 28px -18px rgb(0 0 0 / 0.55)",
-          "background": "var(--paper)",
-          "foreground": "var(--ink)",
-          "card": "var(--surface)",
-          "card-foreground": "var(--ink)",
-          "popover": "var(--surface)",
-          "popover-foreground": "var(--ink)",
-          "primary": "var(--brand)",
-          "primary-foreground": "var(--paper)",
-          "secondary": "var(--surface-2)",
-          "secondary-foreground": "var(--ink)",
-          "muted": "var(--surface-2)",
-          "muted-foreground": "var(--ink-2)",
-          "accent": "var(--surface-2)",
-          "accent-foreground": "var(--ink)",
-          "border": "var(--line)",
-          "input": "var(--line-strong)",
-          "ring": "var(--brand)"
+          "background": "#0b1020",
+          "foreground": "#ece9e1",
+          "card": "#111731",
+          "card-foreground": "#ece9e1",
+          "popover": "#111731",
+          "popover-foreground": "#ece9e1",
+          "primary": "#d9b77e",
+          "primary-foreground": "#0b1020",
+          "secondary": "#182039",
+          "secondary-foreground": "#ece9e1",
+          "muted": "#182039",
+          "muted-foreground": "#a9afc4",
+          "accent": "#182039",
+          "accent-foreground": "#ece9e1",
+          "border": "#242c4b",
+          "input": "#343d63",
+          "ring": "#d9b77e",
+          "radius": "0.75rem"
         },
         "dark": {
           "paper": "#0b1020",
@@ -91,41 +76,58 @@
           "ink": "#ece9e1",
           "ink-2": "#a9afc4",
           "ink-3": "#8f96ad",
-          "on-ink": "#0b1020",
           "positive": "#7cc49b",
-          "positive-ink": "#8fd0aa",
-          "positive-soft": "#172b2b",
           "brand": "#d9b77e",
           "brand-ink": "#e3c592",
-          "brand-on-ink": "var(--brand)",
-          "brand-soft": "color-mix(in oklab, var(--brand) 16%, var(--surface))",
-          "brand-line": "color-mix(in oklab, var(--brand) 45%, var(--paper))",
-          "brand-glint": "color-mix(in oklab, var(--brand) 35%, white)",
-          "night": "#070a16",
           "night-ink": "#ece9e1",
-          "tile-bg": "linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, var(--paper)), color-mix(in oklab, var(--surface) 62%, var(--paper)))",
-          "card-edge": "inset 0 1px 0 0 rgb(255 255 255 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.045)",
-          "card-shadow": "0 1px 1px rgb(0 0 0 / 0.25), 0 14px 28px -18px rgb(0 0 0 / 0.55)",
-          "background": "var(--paper)",
-          "foreground": "var(--ink)",
-          "card": "var(--surface)",
-          "card-foreground": "var(--ink)",
-          "popover": "var(--surface)",
-          "popover-foreground": "var(--ink)",
-          "primary": "var(--brand)",
-          "primary-foreground": "var(--paper)",
-          "secondary": "var(--surface-2)",
-          "secondary-foreground": "var(--ink)",
-          "muted": "var(--surface-2)",
-          "muted-foreground": "var(--ink-2)",
-          "accent": "var(--surface-2)",
-          "accent-foreground": "var(--ink)",
-          "border": "var(--line)",
-          "input": "var(--line-strong)",
-          "ring": "var(--brand)"
+          "background": "#0b1020",
+          "foreground": "#ece9e1",
+          "card": "#111731",
+          "card-foreground": "#ece9e1",
+          "popover": "#111731",
+          "popover-foreground": "#ece9e1",
+          "primary": "#d9b77e",
+          "primary-foreground": "#0b1020",
+          "secondary": "#182039",
+          "secondary-foreground": "#ece9e1",
+          "muted": "#182039",
+          "muted-foreground": "#a9afc4",
+          "accent": "#182039",
+          "accent-foreground": "#ece9e1",
+          "border": "#242c4b",
+          "input": "#343d63",
+          "ring": "#d9b77e",
+          "radius": "0.75rem"
         }
       },
       "css": {
+        "@layer base": {
+          ":root, .dark": {
+            "--brand-on-ink": "var(--brand)",
+            "--brand-soft": "color-mix(in oklab, var(--brand) 16%, var(--surface))",
+            "--brand-glint": "color-mix(in oklab, var(--brand) 35%, white)",
+            "--tile-bg": "linear-gradient(180deg, color-mix(in oklab, var(--surface) 80%, var(--paper)), color-mix(in oklab, var(--surface) 62%, var(--paper)))",
+            "--card-edge": "inset 0 1px 0 0 rgb(255 255 255 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.045)",
+            "--card-shadow": "0 1px 1px rgb(0 0 0 / 0.25), 0 14px 28px -18px rgb(0 0 0 / 0.55)"
+          },
+          "html": {
+            "scroll-behavior": "smooth",
+            "scroll-padding-top": "88px",
+            "-webkit-tap-highlight-color": "transparent"
+          },
+          "body": {
+            "-webkit-font-smoothing": "antialiased",
+            "-moz-osx-font-smoothing": "grayscale",
+            "font-feature-settings": "\"ss01\", \"cv11\""
+          },
+          "::selection": {
+            "background": "var(--brand-soft)",
+            "color": "var(--ink)"
+          },
+          "button:not(:disabled), [role=\"button\"]:not(:disabled)": {
+            "cursor": "pointer"
+          }
+        },
         "@utility container-x": {
           "margin-inline": "auto",
           "width": "100%",
@@ -170,11 +172,6 @@
         "@utility num": {
           "font-family": "var(--font-mono)",
           "font-variant-numeric": "tabular-nums"
-        },
-        "@utility panel": {
-          "border-radius": "1.5rem",
-          "background": "var(--tile-bg)",
-          "box-shadow": "var(--card-edge), var(--card-shadow)"
         },
         "@utility tile": {
           "border-radius": "32px",
@@ -362,9 +359,14 @@
             "stroke-dashoffset": "-100",
             "opacity": "0"
           }
+        },
+        "@media (prefers-reduced-motion: reduce)": {
+          "html": {
+            "scroll-behavior": "auto"
+          }
         }
       },
-      "docs": "Midnight is dark only: the palette is set for both :root and .dark. Load Fraunces, Geist and Geist Mono with next/font: see https://github.com/vilqor/midnight-lite#fonts"
+      "docs": "Midnight is dark only: the palette is set for both :root and .dark. Load Fraunces (normal and italic, axes SOFT and opsz), Geist and Geist Mono with next/font/google, with the variables --font-fraunces, --font-geist-sans and --font-geist-mono, and put the three variable classes on <html>. To change the accent, set --brand, --brand-ink, --primary and --ring."
     },
     {
       "name": "midnight-night-sky",
@@ -459,7 +461,7 @@
           "target": "@lib/fill.ts"
         }
       ],
-      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-header.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
+      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-header.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Works with the Radix and the Base UI styles of shadcn/ui; React Aria (aria-nova) is not supported yet.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
     },
     {
       "name": "midnight-hero",
@@ -492,7 +494,7 @@
           "target": "@components/midnight/section-head.tsx"
         }
       ],
-      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-hero.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
+      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-hero.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Works with the Radix and the Base UI styles of shadcn/ui; React Aria (aria-nova) is not supported yet.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
     },
     {
       "name": "midnight-features",
@@ -533,7 +535,7 @@
           "target": "@lib/fill.ts"
         }
       ],
-      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-features.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
+      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-features.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Works with the Radix and the Base UI styles of shadcn/ui; React Aria (aria-nova) is not supported yet. No TooltipProvider needed: each source badge brings its own.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
     },
     {
       "name": "midnight-cta",
@@ -560,7 +562,7 @@
           "target": "@components/midnight/final-cta.tsx"
         }
       ],
-      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-cta.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
+      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-cta.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Works with the Radix and the Base UI styles of shadcn/ui; React Aria (aria-nova) is not supported yet.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
     },
     {
       "name": "midnight-footer",
@@ -590,7 +592,7 @@
           "target": "@components/midnight/logo.tsx"
         }
       ],
-      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-footer.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Pass year as a number, such as 2026: new Date() breaks next build when cacheComponents is on.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
+      "docs": "The block takes its words as props; the types sit at the top of the file. Name the theme in the same command, for example: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json https://midnight-lite.vilqor.com/r/midnight-footer.json. A theme that only comes in as a dependency adds its colours but keeps your existing --background, --primary and fonts. If the page is not night-blue, run: npx shadcn@latest add https://midnight-lite.vilqor.com/r/midnight-theme.json. Pass year as a number, such as 2026: new Date() breaks next build when cacheComponents is on. Works with the Radix and the Base UI styles of shadcn/ui; React Aria (aria-nova) is not supported yet.\nThe full Midnight template, with seven more sections, forms and analytics: https://templates.vilqor.com/midnight?ref=shadcn"
     }
   ]
 }

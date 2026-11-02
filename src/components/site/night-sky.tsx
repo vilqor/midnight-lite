@@ -37,7 +37,6 @@ const METEORS = [
 
 type NightSkyProps = {
   className?: string
-  style?: React.CSSProperties
   count?: number
   seed?: number
   sparkles?: boolean
@@ -46,11 +45,11 @@ type NightSkyProps = {
 
 /** A quiet night sky: seeded stars, a few that twinkle, hand-placed sparkles and rare shooting stars.
  *  Decorative only: the browser draws it once the page is up and it fades in; at rest it is a still sky. */
-export function NightSky({ className, style, count = 110, seed = 7, sparkles = true, meteors = true }: NightSkyProps) {
+export function NightSky({ className, count = 110, seed = 7, sparkles = true, meteors = true }: NightSkyProps) {
   const mounted = useMounted()
   const stars = mounted ? makeStars(count, seed) : []
   return (
-    <div aria-hidden="true" className={cn("pointer-events-none overflow-hidden select-none", className)} style={style}>
+    <div aria-hidden="true" className={cn("pointer-events-none overflow-hidden select-none", className)}>
       <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 size-full">
         <g fill="var(--night-ink)" className="ornament-in">
           {stars.map((s, i) => (

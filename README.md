@@ -28,15 +28,23 @@ npm run dev
 Open http://localhost:3000. Then make it yours:
 
 1. Rewrite the name and copy in `src/content/site.ts`.
-2. Point the buttons at your sign-up page: `header.cta`, `hero.primary` and `final.button` in `site.ts`.
-3. Remove the links to the full template: set `header.link` and `note` in `site.ts` to `null`.
-4. Pick your accent: `--brand` and `--brand-ink` at the top of `src/app/globals.css`.
-5. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your address.
-6. Replace `public/og.png` with a picture of your page (1200 × 630).
-7. Run `npm run check`, then upload `out/`.
+2. Point the buttons at your sign-up page: `header.cta`, `hero.primary` and `final.button` in `site.ts`. Until you
+   do, the closing button's `href` is `"#"` and leads back to the top.
+3. Pick your accent: `--brand` and `--brand-ink` at the top of `src/app/globals.css`.
+4. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` to your address.
+5. Replace `public/og.png` with a picture of your page (1200 × 630).
+6. Run `npm run check`, then upload `out/`.
 
 The footer says "Made with Midnight Lite". Keep it or set `footer.credit` in `site.ts` to `null`; the license
 doesn't require it.
+
+The [live demo](https://midnight-lite.vilqor.com) also shows a link to the full template in the header, a line about
+it above the footer, and sends the closing button there. That is the demo's own layer in `src/demo/`, built with
+`npm run build:demo` (`NEXT_PUBLIC_LITE_DEMO=1`). Your build never shows it, so you can leave it. To remove it for
+good: delete `src/demo/`; in `src/app/page.tsx` remove the demo imports, `link={demoHeaderLink}` and the `<LiteNote>`
+line, and pass `button={site.final.button}`; in `src/components/site/not-found-page.tsx` remove the import and
+`link={demoHeaderLink}`; then delete the `build:demo` script in `package.json` and the `header.link`, `note` and
+`final.demoHref` keys in `site.ts`.
 
 ## What's inside
 
@@ -51,7 +59,11 @@ doesn't require it.
 - **Footer:** description, link columns that fold on phones, © line, email, and the name set large and fading out.
 - **404 page** in the same sky.
 - **SEO:** title, description, canonical link from `NEXT_PUBLIC_SITE_URL`, `sitemap.xml`, `robots.txt` and a social image.
-- **Motion** only on decoration (glints, sparks, twinkling stars), all of it off for `prefers-reduced-motion`.
+- **Motion** on decoration only: the gold glint, a sheen across the accent buttons, sparks along the rosette,
+  twinkling and shooting stars, fades. All of it stops for `prefers-reduced-motion`, and so do the header's
+  transitions, the footer's turning plus and the tooltip's zoom; colour changes on hover stay. On phones the stars
+  and sparks stay still.
+- **Touch:** links and buttons are at least 44 px tall on phones and on touch screens such as an iPad.
 
 ## Deploy
 
@@ -61,7 +73,10 @@ doesn't require it.
 
 No environment variables are required: on Vercel and Netlify the site's address is picked up on its own. The site is
 a static export: `npm run build` writes `out/`, which runs on any static host (Netlify, Cloudflare Pages, GitHub Pages,
-S3). Elsewhere set `NEXT_PUBLIC_SITE_URL` before the build. `vercel.json` and `public/_headers` add security headers.
+S3). Elsewhere set `NEXT_PUBLIC_SITE_URL` before the build. `vercel.json` and `public/_headers` add security headers;
+other sites may not show your pages in a frame. Two things there belong to the live demo, which catalogs preview in a
+frame: the rules in `vercel.json` for the host `midnight-lite.vilqor.com`, and `npm run build:demo`, which allows a few
+catalogs to frame the demo in its built copy of `_headers`. On your domain neither does anything.
 
 ## Use with AI agents
 
@@ -113,7 +128,11 @@ npx shadcn@latest add @vilqor/midnight-theme @vilqor/midnight-hero
 | `midnight-footer` | Footer with folding link columns and a large fading name |
 
 Blocks install into `components/midnight/` and take their words as props; the types sit at the top of each file
-(`HeroContent`, `FeaturesContent`…). They work with the Radix and the Base UI styles of shadcn/ui.
+(`HeroContent`, `FeaturesContent`…).
+
+**Compatibility:** the Radix and the Base UI styles of shadcn/ui (for example `radix-nova` and `base-nova`) work.
+The React Aria style (`aria-nova`) is not supported yet: its tooltip has a different API and its button is a client
+component.
 
 ### Fonts
 
@@ -147,7 +166,7 @@ to add `midnight-hero` from `@vilqor`.
 | Languages | English | English and German, with a guide to add your own |
 | Look | Dark theme, champagne accent, night sky, one guilloche rosette, gold glint | Also four accent presets with a switcher, more guilloche ornaments with light running along them, section light and a pointer spotlight |
 | Phones | Every section laid out for phones | Also swipe rows, tabs, and a menu and dialogs that stay above the keyboard |
-| For AI editors | AGENTS.md, DESIGN.md, a lint rule that keeps words out of components, `npm run check` | Also a launch checklist script, screenshots at five widths, a language check, starter prompts and shadcn MCP settings |
+| For AI editors | AGENTS.md, DESIGN.md, shadcn MCP settings, a lint rule that keeps words out of components, a starter prompt, `npm run check` | Also a launch checklist script, screenshots at five widths, a language check and more starter prompts |
 | Source | This repository; 8 blocks in the `@vilqor` shadcn registry | The full source as a download, with free updates |
 | Support | GitHub issues | Email to help@vilqor.com |
 
@@ -156,14 +175,20 @@ to add `midnight-hero` from `@vilqor`.
 ## Structure
 
 ```
-src/app/                 layout, page, not-found, globals.css (tokens first, effects after), sitemap, robots, icons
+src/app/                 layout, page, not-found, globals.css (tokens first, effects after), shadcn.css
+                         (two variants from shadcn/ui), sitemap, robots, icons
 src/content/site.ts      every word on the page
-src/components/site/     header, hero, features, final-cta, footer, section-head, night-sky, guilloche, cite, logo
+src/components/site/     header, hero, features, cite, final-cta, footer, section-head, night-sky, guilloche and
+                         guilloche-paths, logo, not-found-page (the 404's content)
 src/components/ui/       button, tooltip (shadcn/ui)
-src/lib/  src/hooks/     cn, fill, seeded random numbers, useMounted
+src/lib/  src/hooks/     cn, fill, metadata, seeded random numbers, useMounted
+src/demo/                the live demo's layer (header link, note, closing button, npm run build:demo);
+                         off unless NEXT_PUBLIC_LITE_DEMO=1
 registry.json            the @vilqor registry items
 public/r/                the built registry (npm run registry:build)
 public/og.png            the social image
+public/logo.svg          the @vilqor mark for registry directories
+docs/                    the draft entry for the shadcn registry directory
 ```
 
 ## License
@@ -177,4 +202,4 @@ part of this repository.
 - Live demo: https://midnight-lite.vilqor.com
 - Full Midnight: https://templates.vilqor.com/midnight?ref=github
 - Full Midnight demo: https://midnight.vilqor.com/?ref=github
-- Questions and bugs: GitHub issues, or help@vilqor.com
+- Questions and bugs: GitHub issues

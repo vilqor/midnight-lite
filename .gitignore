@@ -44,5 +44,3 @@ next-env.d.ts
 # local editor settings
 .claude/
 
-# screenshots from npm run screens
-.screens/

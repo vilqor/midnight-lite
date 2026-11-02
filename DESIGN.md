@@ -17,11 +17,12 @@ Tokens live at the top of `src/app/globals.css`. Use the Tailwind names (`bg-pap
 | Token | Use it for |
 |---|---|
 | `paper` `#0b1020` | the page background |
-| `surface`, `surface-2` | raised areas: chips, inner rows |
-| `night` `#070a16` | the deepest night |
+| `surface` | raised areas: the header island, fact cards, chips |
+| `surface-2` | what shadcn/ui's `secondary`, `muted` and `accent` map to |
 | `ink` | headings, primary text |
 | `ink-2` | body text, secondary labels |
-| `ink-3` | metadata and hints (keep it to 13 px and up; it is the dimmest legible text) |
+| `ink-3` | metadata and hints: small mono labels and numbers, source names. The dimmest text (6.4:1 on `paper`); keep it to 11 px and up |
+| `night-ink` | the stars |
 | `brand` | the accent: one primary button, one highlighted word, one key icon per block |
 | `brand-ink` | the accent as small text (eyebrows, links) |
 | `brand-soft` | a quiet accent fill behind a chip or an icon |
@@ -40,11 +41,12 @@ or one highlighted figure. Not a lit edge plus a glow plus a gold button plus go
 |---|---|---|
 | `display` | Fraunces 340, SOFT 60 | the hero and the closing title; the accent line in `<em className="glint">` |
 | `h2` | Fraunces 350, SOFT 50 | section titles |
-| `h3` | Geist 17 medium | card titles |
 | `lead` | Geist 17/19, `ink-2` | the sentence under a title |
 | `eyebrow-star` | Geist Mono 12, tracked, `brand-ink`, with `<StarGlyph />` | the label above a section title |
-| `eyebrow` | Geist Mono 12, tracked, `ink-2` | small labels inside the product UI |
 | `num` | Geist Mono, tabular | times, prices, counts |
+
+Small labels inside the product pieces are set in place: Geist Mono 11, tracked, uppercase, `ink-3` (see the
+"Sources" label in `features.tsx`). A tile's title is the two-tone sentence in `Tile`.
 
 Titles are sentence case and short. Inputs are at least 16 px on phones (Safari zooms smaller ones).
 
@@ -53,14 +55,14 @@ Titles are sentence case and short. Inputs are at least 16 px on phones (Safari 
 - Width: `container-x` (max 1200 px, 24 px gutter on phones, 20 px under 380 px, 40 px from md).
 - Section rhythm: `py-16 max-md:py-12 md:py-24`; heading to content `mt-12 md:mt-16`.
 - Phone spacing steps: 8 · 12 · 16 · 24 · 32 · 48 px. Card padding 24 on phones, gap between cards 12.
-- Headings: `<SectionHead label title lead align="center" | "left" | "split" />`.
+- Headings: `<SectionHead label title lead />`, centred.
 
 ## Surfaces
 
 | Class | What it is |
 |---|---|
 | `tile` | the big product tile: matte, a crisp inner edge, a short soft shadow |
-| `panel` | a small card |
+| `bg-surface/60` with `rounded-2xl` | a small card, such as the three facts under the tiles |
 | `glass` | the header island: blurred, with a faint top light |
 
 Cards don't nest: an inner row is a flat fill (`bg-paper/60` or `bg-white/[0.04]`), not another card.
@@ -87,14 +89,18 @@ Cards don't nest: an inner row is a flat fill (`bg-paper/60` or `bg-white/[0.04]
 
 - Designed on their own; scope changes with `max-md:`, `max-sm:` or `md:hidden` and leave the desktop alone.
 - The hero is set from the left; tiles stack one under another; footer columns fold.
-- Touch targets at least 44 px, nothing that only works on hover.
+- Touch targets at least 44 px, nothing that only works on hover. Tablets with touch get the same through
+  `pointer-coarse:`, so an iPad gets the height and a mouse keeps the desktop spacing.
 - Check 320, 390 and 768 px.
 
 ## Motion
 
 - Decoration only, defined in the "Magic layer" of `globals.css`, and all of it stops for `prefers-reduced-motion`.
-- Allowed: slow glints, sparks along guilloche lines, twinkling stars, fades.
-- Not allowed: light beams running around borders, spinning ornaments, bouncing, attention loops on buttons.
+  So do the header's transitions, the footer's plus and the tooltip's zoom (`motion-reduce:`).
+- Allowed: slow glints, sparks along guilloche lines, twinkling stars, fades, and one slow sheen across the accent
+  buttons (`shine`, once every 5.5 s).
+- Not allowed: light beams running around borders, spinning ornaments, bouncing, pulsing or blinking buttons, any
+  faster or brighter loop on a button.
 
 ## Do and don't
 

@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:demo": "node src/demo/build.mjs",
     "preview": "npx -y serve@14 out",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",

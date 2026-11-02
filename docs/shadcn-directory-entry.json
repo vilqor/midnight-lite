@@ -1,0 +1,7 @@
+{
+  "name": "@vilqor",
+  "homepage": "https://midnight-lite.vilqor.com",
+  "url": "https://midnight-lite.vilqor.com/r/{name}.json",
+  "description": "Midnight: a dark landing page theme and blocks for AI and SaaS products. A night sky, a guilloche rosette, a serif hero, product tiles with cited sources, a call to action and a footer.",
+  "logo": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path fill='var(--foreground)' fill-rule='evenodd' d='M8 0h16a8 8 0 0 1 8 8v16a8 8 0 0 1-8 8H8a8 8 0 0 1-8-8V8a8 8 0 0 1 8-8Zm2.806 9.762L16 18.953l5.194-9.191a1.5 1.5 0 0 1 2.612 1.476l-6.5 11.5a1.5 1.5 0 0 1-2.612 0l-6.5-11.5a1.5 1.5 0 0 1 2.612-1.476Z'/></svg>"
+}

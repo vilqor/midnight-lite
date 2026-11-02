@@ -1,6 +1,11 @@
 import { Plus } from "lucide-react"
 
+import { cn } from "@/lib/utils"
+
 import { Logo } from "./logo"
+
+// at least 44 px tall wherever a finger taps it: phones, and tablets with touch
+const tap = "max-md:inline-flex max-md:min-h-11 max-md:items-center pointer-coarse:inline-flex pointer-coarse:min-h-11 pointer-coarse:items-center"
 
 export type FooterContent = {
   name: string
@@ -36,10 +41,10 @@ export function Footer({ name, legalName, year, description, email, status, nav,
           {columns.map((col) => (
             <div key={col.title}>
               <p className="font-mono text-[11px] tracking-[0.14em] text-ink-3 uppercase">{col.title}</p>
-              <ul className="mt-4 grid gap-2.5">
+              <ul className="mt-4 grid gap-2.5 pointer-coarse:mt-2 pointer-coarse:gap-0">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a href={l.href} className="text-[14px] text-ink-2 transition-colors hover:text-ink">
+                    <a href={l.href} className={cn("text-[14px] text-ink-2 transition-colors hover:text-ink", tap)}>
                       {l.label}
                     </a>
                   </li>
@@ -49,12 +54,12 @@ export function Footer({ name, legalName, year, description, email, status, nav,
           ))}
         </nav>
         {/* phones: each column folds away; tap a heading to open it */}
-        <nav aria-label={nav} className="grid gap-1 md:hidden">
+        <nav aria-label={nav} className="-mx-4 grid gap-1 md:hidden">
           {columns.map((col) => (
             <details key={col.title} className="group rounded-2xl open:bg-white/[0.03]">
               <summary className="flex h-14 cursor-pointer list-none items-center justify-between px-4 [&::-webkit-details-marker]:hidden">
                 <span className="font-mono text-[12px] tracking-[0.14em] text-ink-2 uppercase">{col.title}</span>
-                <Plus className="size-4 text-ink-3 transition-transform duration-300 group-open:rotate-45" strokeWidth={1.75} aria-hidden="true" />
+                <Plus className="size-4 text-ink-3 transition-transform duration-300 group-open:rotate-45 motion-reduce:transition-none" strokeWidth={1.75} aria-hidden="true" />
               </summary>
               <ul className="px-4 pb-3">
                 {col.links.map((l) => (
@@ -73,11 +78,11 @@ export function Footer({ name, legalName, year, description, email, status, nav,
         <p className="num">
           © {year} {legalName}
         </p>
-        <a href={`mailto:${email}`} className="hover:text-ink max-md:inline-flex max-md:min-h-11 max-md:items-center">
+        <a href={`mailto:${email}`} className={cn("hover:text-ink", tap)}>
           {email}
         </a>
         {credit && (
-          <a href={credit.href} className="hover:text-ink max-md:inline-flex max-md:min-h-11 max-md:items-center sm:ml-auto">
+          <a href={credit.href} className={cn("hover:text-ink sm:ml-auto", tap)}>
             {credit.label}
           </a>
         )}

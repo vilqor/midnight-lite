@@ -8,8 +8,8 @@ licenses.
 ### shadcn/ui · MIT
 
 The components in `src/components/ui/` start from shadcn/ui (https://github.com/shadcn-ui/ui) and were changed for
-this template; `src/app/shadcn.css` is the start of its Tailwind stylesheet (animations and variants), trimmed to
-what the template uses.
+this template; `src/app/shadcn.css` holds two custom variants (`data-open`, `data-closed`) from its Tailwind
+stylesheet, the ones the tooltip uses.
 
 ```
 MIT License

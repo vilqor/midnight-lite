@@ -8,7 +8,7 @@ type CiteProps = {
   n: number
   title: string
   where: string
-  /** what screen readers hear, for example "Source 1: Support inbox" */
+  /** what screen readers hear, for example "Source 1: 38 tickets tagged billing, Tue to Thu" */
   label: string
 }
 
@@ -33,7 +33,7 @@ export function Cite({ n, title, where, label }: CiteProps) {
         >
           {n}
         </TooltipTrigger>
-        <TooltipContent side="top" collisionPadding={12} className="max-w-[240px] flex-col items-start gap-0 text-[12px] leading-4">
+        <TooltipContent side="top" collisionPadding={12} className="max-w-[240px] flex-col items-start gap-0 text-[12px] leading-4 motion-reduce:animate-none">
           <span className="block font-medium">{title}</span>
           <span className="mt-0.5 block opacity-70">{where}</span>
         </TooltipContent>

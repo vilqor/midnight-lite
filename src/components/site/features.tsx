@@ -69,10 +69,16 @@ function SourcesArt({ s }: { s: FeaturesContent["sources"] }) {
       <p className="text-[17px] leading-8 text-ink max-md:text-[15px] max-md:leading-7">
         {s.parts.map((p, i) => {
           const src = p.cite ? s.sources[p.cite - 1] : undefined
+          if (!src) return <span key={i}>{p.text}</span>
+          // the number stays on the line of the word before it: the last word and the badge don't break apart
+          const cut = p.text.lastIndexOf(" ") + 1
           return (
             <span key={i}>
-              {p.text}
-              {src && <Cite {...src} label={fill(s.cite, { n: src.n, title: src.title })} />}
+              {p.text.slice(0, cut)}
+              <span className="whitespace-nowrap">
+                {p.text.slice(cut)}
+                <Cite {...src} label={fill(s.cite, { n: src.n, title: src.title })} />
+              </span>
             </span>
           )
         })}

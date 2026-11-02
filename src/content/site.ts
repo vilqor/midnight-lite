@@ -17,7 +17,8 @@ export const site = {
       { label: "Product", href: "/#product" },
       { label: "Get started", href: "/#start" },
     ],
-    // a quiet text link left of the button, shown from 1024 px; set it to null to remove it
+    // the live demo's link to the full template, left of the button from 1024 px. It shows only in the demo build
+    // (NEXT_PUBLIC_LITE_DEMO=1, see src/demo); your site never renders it, so you can leave it or set it to null
     link: { label: "Full template · $59", href: "https://templates.vilqor.com/midnight?ref=lite" } as { label: string; href: string } | null,
     // the one button in the header; point it at your sign-up page
     cta: { label: "Start free", short: "Start free", href: "/#start" },
@@ -99,10 +100,12 @@ export const site = {
     lead: "Start free. Your first brief arrives tomorrow at 7:00.",
     // your sign-up page
     button: { label: "Start free", href: "#" },
+    // where the button goes in the live demo (NEXT_PUBLIC_LITE_DEMO=1), in a new tab; your site uses `button.href`
+    demoHref: "https://templates.vilqor.com/midnight?ref=lite",
     note: "Free plan · No card required",
   },
 
-  // one quiet line above the footer; delete it (or set it to null) to remove it
+  // the live demo's line above the footer. Like `header.link`, it shows only in the demo build; set it to null if you like
   note: {
     text: "This page is Midnight Lite, a free template under the MIT license. The full Midnight has seven more sections, working forms, analytics and a second language.",
     link: { label: "Full template · $59", href: "https://templates.vilqor.com/midnight?ref=lite" },
