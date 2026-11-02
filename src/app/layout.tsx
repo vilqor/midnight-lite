@@ -1,5 +1,7 @@
 import { Fraunces, Geist, Geist_Mono } from "next/font/google"
 
+import { liteDemo } from "@/demo"
+import { SourceRef } from "@/demo/source-ref"
 import { siteMetadata } from "@/lib/metadata"
 import "./globals.css"
 
@@ -20,7 +22,10 @@ const fraunces = Fraunces({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`dark ${geistSans.variable} ${geistMono.variable} ${fraunces.variable}`}>
-      <body className="min-h-dvh">{children}</body>
+      <body className="min-h-dvh">
+        {children}
+        {liteDemo && <SourceRef />}
+      </body>
     </html>
   )
 }

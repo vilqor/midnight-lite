@@ -36,11 +36,13 @@ The footer says "Made with Midnight Lite". Keep it or set `footer.credit` in `si
 doesn't require it.
 
 The [live demo](https://midnight-lite.vilqor.com) also shows a link to the full template in the header, a line about
-it above the footer, and sends the closing button there. That is the demo's own layer in `src/demo/`, built with
+it above the footer, and sends the closing button there; those links tell the store which site the visitor came from.
+That is the demo's own layer in `src/demo/`, built with
 `npm run build:demo` (`NEXT_PUBLIC_LITE_DEMO=1`). Your build never shows it, so you can leave it. To remove it for
 good: delete `src/demo/`; in `src/app/page.tsx` remove the demo imports, `link={demoHeaderLink}` and the `<LiteNote>`
 line, and pass `button={site.final.button}` and `note={site.final.note}`; in `src/components/site/not-found-page.tsx` remove the import and
-`link={demoHeaderLink}`; then delete the `build:demo` script in `package.json` and the `header.link`, `note` and
+`link={demoHeaderLink}`; in `src/app/layout.tsx` remove the two demo imports and the `<SourceRef />` line; then delete
+the `build:demo` script in `package.json` and the `header.link`, `note` and
 `final.demo*` keys in `site.ts`.
 
 ## What's inside
@@ -177,7 +179,7 @@ src/components/site/     header, hero, features, cite, final-cta, footer, sectio
                          guilloche-paths, logo, not-found-page (the 404's content)
 src/components/ui/       button, tooltip (shadcn/ui)
 src/lib/  src/hooks/     cn, fill, metadata, seeded random numbers, useMounted
-src/demo/                the live demo's layer (header link, note, closing button, npm run build:demo);
+src/demo/                the live demo's layer (header link, note, closing button, source tag, build:demo);
                          off unless NEXT_PUBLIC_LITE_DEMO=1
 registry.json            the @vilqor registry items
 public/r/                the built registry (npm run registry:build)
