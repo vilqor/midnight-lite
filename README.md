@@ -11,6 +11,8 @@ seven more sections, working forms, analytics and a second language. See [Lite a
 
 [Live demo](https://midnight-lite.vilqor.com) · [Full Midnight](https://templates.vilqor.com/midnight?ref=github)
 
+![Midnight Lite: the first screen, a serif title over a night sky with an engraved guilloche rosette](docs/preview.jpg)
+
 **Stack:** Next.js 16 (App Router, static export) · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui (Radix) · Lucide
 
 ## Quick start
